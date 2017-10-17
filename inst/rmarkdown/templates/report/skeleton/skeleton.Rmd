@@ -1,5 +1,5 @@
 ---
-title: "CARP Reproducibility Report"
+title: "CARPS Reproducibility Report"
 output:
   html_document:
     toc: true
