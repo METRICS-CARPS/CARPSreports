@@ -39,7 +39,7 @@ library(tidyverse) # for data munging
 library(knitr) # for kable table formating
 library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
 library(readxl) # import excel files
-library(carpsReports) # custom report functions
+library(CARPSreports) # custom report functions
 ```
 
 ## Step 2: Load data
