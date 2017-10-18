@@ -78,7 +78,7 @@ library(CARPSreports) # custom report functions
 ```{r}
 # You can delete this commented text for your report, it is here to serve as a guide.
 # Use the carpsReport() function in this code chunk.
-# Here is a guide to the parameters you should include in the function:
+# Here is a guide to the arguments you should include in the function:
 # Report_Type: Enter 'pilot' or 'final'
 # Article_ID: Enter the article's unique ID code
 # Insufficient_Information_Errors: Enter the number of Insufficient Information Errors
