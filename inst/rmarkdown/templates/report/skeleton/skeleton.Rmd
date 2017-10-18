@@ -85,7 +85,6 @@ library(CARPSreports) # custom report functions
 # Decision_Errors Enter: the number of decision errors
 # Major_Numerical_Errors: Enter the number of major numerical errors
 # Time_to_Complete: Enter the estimated time to complete the report in minutes
-# Substantive_Conclusion_Affected: Enter whether you think the substantive conclusion of the article is affected by any of the errors you encountered (TRUE/FALSE)
 # Author_Assistance: Enter whether author assistance was required (TRUE/FALSE)
 # FOR EXAMPLE:
 # carpsReport(Report_Type = "pilot", 
@@ -94,7 +93,6 @@ library(CARPSreports) # custom report functions
 #             Decision_Errors = 1, 
 #             Major_Numerical_Errors = 4, 
 #             Time_to_Complete = 120, 
-#             Substantive_Conclusion_Affected = FALSE, 
 #             Author_Assistance = TRUE)
 ```
 
