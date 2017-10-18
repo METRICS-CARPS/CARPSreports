@@ -5,8 +5,7 @@
 \title{carpsReport function}
 \usage{
 carpsReport(Report_Type, Article_ID, Insufficient_Information_Errors,
-  Decision_Errors, Major_Numerical_Errors, Time_to_Complete,
-  Substantive_Conclusion_Affected, Author_Assistance)
+  Decision_Errors, Major_Numerical_Errors, Time_to_Complete, Author_Assistance)
 }
 \arguments{
 \item{Report_Type}{Enter 'pilot' or 'final'}
@@ -21,8 +20,6 @@ carpsReport(Report_Type, Article_ID, Insufficient_Information_Errors,
 
 \item{Time_to_Complete}{Enter the estimated time to complete the report in minutes}
 
-\item{Substantive_Conclusion_Affected}{Enter whether you think the substantive conclusion of the article is affected by any errors you encountered (T/F)}
-
 \item{Author_Assistance}{Enter whether author assistance was required (T/F)}
 }
 \value{
@@ -32,5 +29,5 @@ Returns a formatted table (via kable) reporting error tallys. Also writes out a 
 This is a helper function for building standardised final outcomes for CARPS reproducibility reports.
 }
 \examples{
-carpsReport(Report_Type = "pilot", Article_ID = "ABhgyo", Insufficient_Information_Errors = 0, Decision_Errors = 1, Major_Numerical_Errors = 4, Time_to_Complete = 120, Substantive_Conclusion_Affected = F, Author_Assistance = T)
+carpsReport(Report_Type = "pilot", Article_ID = "ABhgyo", Insufficient_Information_Errors = 0, Decision_Errors = 1, Major_Numerical_Errors = 4, Time_to_Complete = 120, Author_Assistance = T)
 }
