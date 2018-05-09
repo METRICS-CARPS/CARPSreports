@@ -102,7 +102,13 @@ reproCheck <- function(reportedValue,
       if((reportedValue >= .05 && obtainedValue <.05) || (reportedValue < .05 && obtainedValue >= .05)){ # if p on wrong side of boundary
         comparisonOutcome <- "DECISION_ERROR"
       }else{ # p value is not on wrong side of boundary
-        comparisonOutcome <- "MAJOR_ERROR"
+        if(pe >= 10){
+          comparisonOutcome <- "MAJOR_ERROR"
+        }else if(pe > 0 & pe < 10){
+          comparisonOutcome <- "MINOR_ERROR"
+        }else{
+          comparisonOutcome <- "MATCH"
+        }
       }
     }
 

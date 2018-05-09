@@ -120,7 +120,7 @@ reportObject <- reportObject %>%
 # Author_Assistance: Enter whether author assistance was required (TRUE/FALSE)
 # FOR EXAMPLE:
 # reproReport(Report_Type = "pilot", 
-#             Article_ID = "ABhgyo", 
+#             Article_ID = "9-2-2015_PS", 
 #             Insufficient_Information_Errors = 0, 
 #             Decision_Errors = 1, 
 #             Major_Numerical_Errors = 4, 
