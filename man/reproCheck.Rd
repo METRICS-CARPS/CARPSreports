@@ -5,8 +5,9 @@
 \title{reproCheck function}
 \usage{
 reproCheck(reportedValue, obtainedValue, valueType = c("p", "mean", "sd",
-  "se", "df", "F", "t", "bf", "ci", "median", "es", "irr", "r", "z", "coeff",
-  "n", "x2", "other"), updatedReportObject = reportObject)
+  "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff",
+  "n", "x2", "other"), eyeballCheck = FALSE,
+  updatedReportObject = reportObject)
 }
 \arguments{
 \item{reportedValue}{Enter the value reported in the article}
@@ -26,10 +27,13 @@ Errors types are defined as follows:
 >> 'major numerical' (i.e., PE >= 10%)
 If p values are being compared, also returns an additional error type:
 >> 'decision error' (i.e., reported p and obtained p fall on different sides of the .05 threshold)
-The default value types are as follows: "p" (p-value), "mean" (mean), "sd" (standard deviation), "se" (standard error), "df" (degrees of freedom), "F" (F test statistic), "t" (t test statistic), "bf" (bayes factor), "ci" (confidence interval), "median" (median), "es" (effect size), "irr" (inter-rater reliability), "r" (Pearson correlation coefficient), "z" (Wilcoxon z), "coeff" (regression coefficients), "n" (count or proportion), "x2" (chi squared), "other")
+The default value types are as follows: "p" (p-value), "mean" (mean), "sd" (standard deviation), "se" (standard error), "df" (degrees of freedom), "F" (F test statistic), "t" (t test statistic), "bf" (bayes factor), "ci" (confidence interval), "median" (median), "d" (Cohen's d), "irr" (inter-rater reliability), "r" (Pearson correlation coefficient), "z" (Wilcoxon z), "coeff" (regression coefficients), "n" (count or proportion), "x2" (chi squared), "other")
+Note that sometimes exact values are not reported in the article (e.g., p < .05 ot t <1). In these cases you should visually inspect (eyeball) whether the obtained value falls on the correct side of the specified boundary (e.g., p <.05). If eyeballing is necessary, change the "eyeballCheck" parameter to TRUE if the values appear to match or FALSE if the values do not apepar to match. The eyeballCheck parameter defaults to NA because usually no eyeball check is required.
 }
 \examples{
-reproCheck(reportedValue = '3.45', obtainedValue = '1.34', valueType = 'mean')
-reproCheck(reportedValue = '.054', obtainedValue = '.049', valueType = 'p')
-reproCheck(reportedValue = '15.63', obtainedValue = '15.63', valueType = 'sd')
+reproCheck(reportedValue = '3.45', obtainedValue = condition_mean, valueType = 'mean', eyeballCheck = NA)
+reproCheck(reportedValue = '.054', obtainedValue = a_p_value, valueType = 'p', eyeballCheck = NA)
+reproCheck(reportedValue = '15.63', obtainedValue = this_sd, valueType = 'sd', eyeballCheck = NA)
+reproCheck(reportedValue = '<.05', obtainedValue = a_significant_p_value, valueType = 'p', eyeballCheck = TRUE)
+reproCheck(reportedValue = '<.05', obtainedValue = a_nonsignificant_p_value, valueType = 'p', eyeballCheck = FALSE)
 }

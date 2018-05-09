@@ -25,7 +25,7 @@
 reproCheck <- function(reportedValue,
                        obtainedValue,
                        valueType = c("p", "mean", "sd", "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff", "n", "x2", "other"),
-                       eyeballCheck = FALSE,
+                       eyeballCheck = NA,
                        updatedReportObject = reportObject) {
 
   # check that obtained value is length one

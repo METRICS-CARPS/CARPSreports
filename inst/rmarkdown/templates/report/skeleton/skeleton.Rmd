@@ -45,7 +45,7 @@ completionDate <- NA # copilot insert the date of final report completion (after
 knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
 ```
 
-## Step 1: Load packages and prepare report object
+# Step 1: Load packages and prepare report object
 
 [PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]
 
@@ -65,36 +65,36 @@ library(CARPSreports) # custom report functions
 reportObject <- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = NA, valueType = NA, percentageError = NA, comparisonOutcome = NA, eyeballCheck = NA)
 ```
 
-## Step 2: Load data
+# Step 2: Load data
 
 ```{r}
 ```
 
-## Step 3: Tidy data
+# Step 3: Tidy data
 
 ```{r}
 ```
 
-## Step 4: Run analysis
+# Step 4: Run analysis
 
-### Pre-processing
+## Pre-processing
 
 [you can remove this section if no pre-processing is required]
 
 ```{r}
 ```
 
-### Descriptive statistics
+## Descriptive statistics
 
 ```{r}
 ```
 
-### Inferential statistics
+## Inferential statistics
 
 ```{r}
 ```
 
-## Step 5: Conclusion
+# Step 5: Conclusion
 
 [Please include a text summary describing your findings. If this reproducibility check was a failure, you should note any suggestions as to what you think the likely cause(s) might be.]
   
@@ -103,7 +103,7 @@ reportObject <- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = 
 ```{r}
 Author_Assistance = FALSE # was author assistance provided? (if so, enter TRUE)
 
-Insufficient_Information_Errors <- NA # how many discrete insufficient information issues did you encounter?
+Insufficient_Information_Errors <- 0 # how many discrete insufficient information issues did you encounter?
 
 # Assess the causal locus (discrete reproducibility issues) of any reproducibility errors. Note that there doesn't necessarily have to be a one-to-one correspondance between discrete reproducibility issues and reproducibility errors. For example, it could be that the original article neglects to mention that a Greenhouse-Geisser correct was applied to ANOVA outcomes. This might result in multiple reproducibility errors, but there is a single causal locus (discrete reproducibility issue).
 
@@ -125,16 +125,31 @@ reportObject <- reportObject %>%
   mutate(articleID = articleID) %>% # add variables to report 
   select(articleID, everything()) # make articleID first column
 
-reportDetails <- data.frame(articleID, pilotNames, copilotNames, pilotTTC, copilotTTC, pilotStartDate, copilotStartDate, completionDate, Author_Assistance, Insufficient_Information_Errors, locus_typo, locus_specification, locus_analysis, locus_data, locus_unidentified)
+# decide on final outcome
+if(any(reportObject$comparisonOutcome != "MATCH") | Insufficient_Information_Errors > 0){
+  finalOutcome <- "Failure without author assistance"
+  if(Author_Assistance == T){
+    finalOutcome <- "Failure despite author assistance"
+  }
+}else{
+  finalOutcome <- "Success without author assistance"
+  if(Author_Assistance == T){
+    finalOutcome <- "Success with author assistance"
+  }
+}
 
+# collate report extra details
+reportExtras <- data.frame(articleID, pilotNames, copilotNames, pilotTTC, copilotTTC, pilotStartDate, copilotStartDate, completionDate, Author_Assistance, finalOutcome, Insufficient_Information_Errors, locus_typo, locus_specification, locus_analysis, locus_data, locus_unidentified)
+
+# save report objects
 if(reportType == "pilot"){
   write_csv(reportObject, "pilotReportDetailed.csv")
-  write_csv(reportObject, "pilotReportSummary.csv")
+  write_csv(reportExtras, "pilotReportExtras.csv")
 }
 
 if(reportType == "final"){
   write_csv(reportObject, "finalReportDetailed.csv")
-  write_csv(reportObject, "finalReportSummary.csv")
+  write_csv(reportExtras, "finalReportExtras.csv")
 }
 ```
 
