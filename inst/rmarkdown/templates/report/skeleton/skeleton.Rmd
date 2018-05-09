@@ -6,40 +6,62 @@ output:
     toc_float: true
 ---
 
-#### Article ID: [Insert article ID number]
-#### Pilot 1: [Insert name of pilot]
-#### Co-pilot: [Insert name of additional pilot]
-#### Start date: [Insert start date - use US format]
-#### End date: [Insert end date - use US format]   
+[PILOT/COPILOT - TEXT IN SQUARE BRACKETS IS HERE FOR GUIDANCE. COPILOT PLEASE DELETE BEFORE KNITTING THE FINAL REPORT]
 
--------
+# Report Details
+
+[PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]
+
+```{r}
+articleID <- NA # insert the article ID code here e.g., "Ghi8O"
+pilotName <- NA # insert the pilot's name here e.g., "Tom Hardwicke"
+copilotName <- NA # insert the co-pilot's name here e.g., "Michael Frank"
+pilotTTC <- NA # insert the pilot's estimated time to complete (in minutes, fine to approximate) e.g., 120
+copilotTTC <- NA # insert the co- pilot's estimated time to complete (in minutes, fine to approximate) e.g., 120
+pilotStartDate <- NA # insert the pilot's start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+pilotStartDate <- NA # insert the co-pilot's start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+completionDate <- NA # copilot insert the date of final report completion (after any necessary rounds of author assistance) in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+```
+
+------
 
 #### Methods summary: 
-[Write a brief summary of the methods underlying the target outcomes written in your own words]
+
+[PILOT/COPILOT write a brief summary of the methods underlying the target outcomes written in your own words]
 
 ------
 
 #### Target outcomes: 
-[Insert the target outcomes identified in targetOutcomes.md]  
+
+[PILOT copy and paste the target outcomes identified in targetOutcomes.md]  
 
 ------
 
-[The chunk below sets up some formatting options for the R Markdown document]
+[PILOT/COPILOT DO NOT CHANGE THE CODE IN THE CHUNK BELOW]  
 
 ```{r global_options, include=FALSE}
+# sets up some formatting options for the R Markdown document
 knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
 ```
 
-## Step 1: Load packages
+## Step 1: Load packages and prepare report object
 
-[Some useful packages are being loaded below. You can add any additional ones you might need too.]
+[PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]
 
 ```{r}
+# load packages
 library(tidyverse) # for data munging
 library(knitr) # for kable table formating
 library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
 library(readxl) # import excel files
 library(CARPSreports) # custom report functions
+```
+
+[PILOT/COPILOT DO NOT MAKE CHANGES TO THE CODE CHUNK BELOW]
+
+```{r}
+# Prepare report object. This will be updated automatically by the reproCheck function each time values are compared
+reportObject <- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = NA, valueType = NA, percentageError = NA, comparisonOutcome = NA, eyeballCheck = NA)
 ```
 
 ## Step 2: Load data
@@ -73,11 +95,21 @@ library(CARPSreports) # custom report functions
 
 ## Step 5: Conclusion
 
-[Include the carpsReport function below]
+[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
+
+```{r}
+reportObject <- reportObject %>%
+  filter(dummyRow == FALSE) %>% # remove the dummy row
+  select(-dummyRow) %>% # remove dummy row designation
+  mutate(articleID = articleID) %>% # add the articleID 
+  select(articleID, everything()) # make articleID first column
+```
+  
+[PILOT/COPILOT ENTER RELEVANT INFORMATION BELOW]
 
 ```{r}
 # You can delete this commented text for your report, it is here to serve as a guide.
-# Use the carpsReport() function in this code chunk.
+# Use the reproReport() function in this code chunk.
 # Here is a guide to the arguments you should include in the function:
 # Report_Type: Enter 'pilot' or 'final'
 # Article_ID: Enter the article's unique ID code
@@ -87,13 +119,44 @@ library(CARPSreports) # custom report functions
 # Time_to_Complete: Enter the estimated time to complete the report in minutes
 # Author_Assistance: Enter whether author assistance was required (TRUE/FALSE)
 # FOR EXAMPLE:
-# carpsReport(Report_Type = "pilot", 
+# reproReport(Report_Type = "pilot", 
 #             Article_ID = "ABhgyo", 
 #             Insufficient_Information_Errors = 0, 
 #             Decision_Errors = 1, 
 #             Major_Numerical_Errors = 4, 
 #             Time_to_Complete = 120, 
 #             Author_Assistance = TRUE)
+
+
+
+# REPLACE ALL NAs (if there were no issues assign a zero)
+Insufficient_Information_Errors <- NA # how many discrete insufficient information issues did you encounter?
+
+# Assess the causal locus (discrete reproducibility issues) of any reproducibility errors. Note that doesn't necessarily have to be a one-to-one correspondance between discrete reproducibility issues and reproducibility errors. For example, it could be that the original article neglects to mention that a Greenhouse-Geisser correct was applied to ANOVA outcomes. This might result in multiple reproducibility errors, but there is a single causal locus (discrete reproducibility issue).
+
+locus_typo <- NA # how many discrete issues did you encounter that related to typographical errors?
+locus_specification <- NA # how many discrete issues did you encounter that related to incomplete, incorrect, or unclear specification of the original analyses?
+locus_analysis <- NA # how many discrete issues did you encounter that related to errors in the authors' original analyses?
+locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
+locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
+
+Affects_Conclusion <- NA # Do any reproduciiblity issues encounter appear to affect the conclusions made in the original article?
+
+
+
+                             "Affects_Conclusion" = affectsConclusion,
+                             "errorLocus_typo" = errorLocus_typo,
+                             "errorLocus_specification" = errorLocus_specification,
+                             "errorLocus_analysis" = errorLocus_analysis,
+                             "errorLocus_data" = errorLocus_data,
+                             "errorLocus_unidentified" = errorLocus_unidentified,
+                             "Nature_of_Assistance" = Nature_of_Assistance,
+                             "correctionSuggested" = correctionSuggested,
+                             "correctionPublished" = correctionPublished,
+                             "Resolved_Insufficient_Information_Errors" = Resolved_Insufficient_Information_Errors,
+                             "Resolved_Decision_Errors" = Resolved_Decision_Errors,
+                             "Resolved_Major_Numerical_Errors" = Resolved_Major_Numerical_Errors)
+
 ```
 
 [Please also include a brief text summary describing your findings. If this reproducibility check was a failure, you should note any suggestions as to what you think the likely cause(s) might be.]

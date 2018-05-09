@@ -1,4 +1,4 @@
-#' carpsReport2 function
+#' repro function
 #'
 #' This is a helper function for building standardised final outcomes for CARPS reproducibility reports.
 #' @param Report_Type Enter 'pilot' or 'joint'
@@ -11,9 +11,9 @@
 #' @return Returns a formatted table (via kable) reporting error tallys. Also writes out a csv object containing the error tallys.
 #' @export
 #' @examples
-#' carpsReport2(Report_Type = "final", Article_ID = "ABhgyo", Insufficient_Information_Errors = 0, Decision_Errors = 1, Major_Numerical_Errors = 4, Minor_Numerical_Errors = 12, Author_Assistance = T)
+#' reproReport(Report_Type = "final", Article_ID = "ABhgyo", Insufficient_Information_Errors = 0, Decision_Errors = 1, Major_Numerical_Errors = 4, Minor_Numerical_Errors = 12, Author_Assistance = T)
 
-carpsReport2 <- function(Report_Type, Article_ID, valuesChecked, Total_df = 0, Total_p = 0, Total_mean = 0, Total_sd = 0, Total_se = 0, Total_ci = 0, Total_bf = 0, Total_t = 0, Total_F = 0, Total_es = 0, Total_median = 0, Total_other = 0,
+reproReport <- function(Report_Type, Article_ID, valuesChecked, Total_df = 0, Total_p = 0, Total_mean = 0, Total_sd = 0, Total_se = 0, Total_ci = 0, Total_bf = 0, Total_t = 0, Total_F = 0, Total_es = 0, Total_median = 0, Total_other = 0,
                        Insufficient_Information_Errors, Decision_Errors, Major_Numerical_Errors, Minor_Numerical_Errors,
                        Major_df = 0, Major_p = 0, Major_mean = 0, Major_sd = 0, Major_se = 0, Major_ci = 0, Major_bf = 0,
                        Major_t = 0, Major_F = 0, Major_es = 0, Major_median = 0, Major_other = 0,
