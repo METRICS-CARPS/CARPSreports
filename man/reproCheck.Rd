@@ -6,16 +6,20 @@
 \usage{
 reproCheck(reportedValue, obtainedValue, valueType = c("p", "mean", "sd",
   "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff",
-  "n", "x2", "other"), eyeballCheck = FALSE,
+  "n", "x2", "other"), eyeballCheck = NA,
   updatedReportObject = reportObject)
 }
 \arguments{
 \item{reportedValue}{Enter the value reported in the article}
 
 \item{obtainedValue}{Enter the corresponding value obtained in your reproducibility check}
+
+\item{valueType}{The type of value being compared}
+
+\item{eyeballCheck}{whether a manual 'eyeball' comparison was required, and the outcome of the comparison TRUE/FALSE. Defaults to NA.}
 }
 \value{
-Returns a short text report noting the error type and the PE.
+Returns a short text report noting the error type and the PE. Output can also be assigned to a reportObject to keep a running tally of comparisons
 }
 \description{
 This is a helper function to aid comparison of values reported in articles to values obtained in reproducibility checks.

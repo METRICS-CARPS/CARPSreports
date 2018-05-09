@@ -13,7 +13,9 @@
 #' Note that sometimes exact values are not reported in the article (e.g., p < .05 ot t <1). In these cases you should visually inspect (eyeball) whether the obtained value falls on the correct side of the specified boundary (e.g., p <.05). If eyeballing is necessary, change the "eyeballCheck" parameter to TRUE if the values appear to match or FALSE if the values do not apepar to match. The eyeballCheck parameter defaults to NA because usually no eyeball check is required.
 #' @param reportedValue Enter the value reported in the article
 #' @param obtainedValue Enter the corresponding value obtained in your reproducibility check
-#' @return Returns a short text report noting the error type and the PE.
+#' @param valueType The type of value being compared
+#' @param eyeballCheck whether a manual 'eyeball' comparison was required, and the outcome of the comparison TRUE/FALSE. Defaults to NA.
+#' @return Returns a short text report noting the error type and the PE. Output can also be assigned to a reportObject to keep a running tally of comparisons
 #' @export
 #' @examples
 #' reproCheck(reportedValue = '3.45', obtainedValue = condition_mean, valueType = 'mean', eyeballCheck = NA)
