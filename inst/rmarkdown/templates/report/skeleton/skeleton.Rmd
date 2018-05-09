@@ -13,13 +13,14 @@ output:
 [PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]
 
 ```{r}
-articleID <- NA # insert the article ID code here e.g., "Ghi8O"
-pilotName <- NA # insert the pilot's name here e.g., "Tom Hardwicke"
-copilotName <- NA # insert the co-pilot's name here e.g., "Michael Frank"
+articleID <- NA # insert the article ID code here e.g., "10-3-2015_PS"
+reportType <- NA # specify whether this is the 'pilot' report or 'final' report
+pilotNames <- NA # insert the pilot's name here e.g., "Tom Hardwicke".  If there are multiple cpilots enter both names in a character string e.g., "Tom Hardwicke, Bob Dylan"
+copilotNames <- NA # # insert the co-pilot's name here e.g., "Michael Frank". If there are multiple co-pilots enter both names in a character string e.g., "Tom Hardwicke, Bob Dylan"
 pilotTTC <- NA # insert the pilot's estimated time to complete (in minutes, fine to approximate) e.g., 120
-copilotTTC <- NA # insert the co- pilot's estimated time to complete (in minutes, fine to approximate) e.g., 120
+copilotTTC <- NA # insert the co-pilot's estimated time to complete (in minutes, fine to approximate) e.g., 120
 pilotStartDate <- NA # insert the pilot's start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
-pilotStartDate <- NA # insert the co-pilot's start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+copilotStartDate <- NA # insert the co-pilot's start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 completionDate <- NA # copilot insert the date of final report completion (after any necessary rounds of author assistance) in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 ```
 
@@ -95,71 +96,49 @@ reportObject <- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = 
 
 ## Step 5: Conclusion
 
+[Please include a text summary describing your findings. If this reproducibility check was a failure, you should note any suggestions as to what you think the likely cause(s) might be.]
+  
+[PILOT/COPILOT ENTER RELEVANT INFORMATION BELOW]
+
+```{r}
+Author_Assistance = FALSE # was author assistance provided? (if so, enter TRUE)
+
+Insufficient_Information_Errors <- NA # how many discrete insufficient information issues did you encounter?
+
+# Assess the causal locus (discrete reproducibility issues) of any reproducibility errors. Note that there doesn't necessarily have to be a one-to-one correspondance between discrete reproducibility issues and reproducibility errors. For example, it could be that the original article neglects to mention that a Greenhouse-Geisser correct was applied to ANOVA outcomes. This might result in multiple reproducibility errors, but there is a single causal locus (discrete reproducibility issue).
+
+locus_typo <- NA # how many discrete issues did you encounter that related to typographical errors?
+locus_specification <- NA # how many discrete issues did you encounter that related to incomplete, incorrect, or unclear specification of the original analyses?
+locus_analysis <- NA # how many discrete issues did you encounter that related to errors in the authors' original analyses?
+locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
+locus_unidentified <- NA # how many discrete issues were there for which you could not identify the cause
+
+Affects_Conclusion <- NA # Do any reproducibility issues encounter appear to affect the conclusions made in the original article? This is a subjective judgement, but you should taking into account multiple factors, such as the presence/absence of decision errors, the number of target outcomes that could not be reproduced, the type of outcomes that could or could not be reproduced, the difference in magnitude of effect sizes, and the predictions of the specific hypothesis under scrutiny.
+```
+
 [PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
 
 ```{r}
 reportObject <- reportObject %>%
   filter(dummyRow == FALSE) %>% # remove the dummy row
   select(-dummyRow) %>% # remove dummy row designation
-  mutate(articleID = articleID) %>% # add the articleID 
+  mutate(articleID = articleID) %>% # add variables to report 
   select(articleID, everything()) # make articleID first column
-```
-  
-[PILOT/COPILOT ENTER RELEVANT INFORMATION BELOW]
 
-```{r}
-# You can delete this commented text for your report, it is here to serve as a guide.
-# Use the reproReport() function in this code chunk.
-# Here is a guide to the arguments you should include in the function:
-# Report_Type: Enter 'pilot' or 'final'
-# Article_ID: Enter the article's unique ID code
-# Insufficient_Information_Errors: Enter the number of Insufficient Information Errors
-# Decision_Errors Enter: the number of decision errors
-# Major_Numerical_Errors: Enter the number of major numerical errors
-# Time_to_Complete: Enter the estimated time to complete the report in minutes
-# Author_Assistance: Enter whether author assistance was required (TRUE/FALSE)
-# FOR EXAMPLE:
-# reproReport(Report_Type = "pilot", 
-#             Article_ID = "9-2-2015_PS", 
-#             Insufficient_Information_Errors = 0, 
-#             Decision_Errors = 1, 
-#             Major_Numerical_Errors = 4, 
-#             Time_to_Complete = 120, 
-#             Author_Assistance = TRUE)
+reportDetails <- data.frame(articleID, pilotNames, copilotNames, pilotTTC, copilotTTC, pilotStartDate, copilotStartDate, completionDate, Author_Assistance, Insufficient_Information_Errors, locus_typo, locus_specification, locus_analysis, locus_data, locus_unidentified)
 
+if(reportType == "pilot"){
+  write_csv(reportObject, "pilotReportDetailed.csv")
+  write_csv(reportObject, "pilotReportSummary.csv")
+}
 
-
-# REPLACE ALL NAs (if there were no issues assign a zero)
-Insufficient_Information_Errors <- NA # how many discrete insufficient information issues did you encounter?
-
-# Assess the causal locus (discrete reproducibility issues) of any reproducibility errors. Note that doesn't necessarily have to be a one-to-one correspondance between discrete reproducibility issues and reproducibility errors. For example, it could be that the original article neglects to mention that a Greenhouse-Geisser correct was applied to ANOVA outcomes. This might result in multiple reproducibility errors, but there is a single causal locus (discrete reproducibility issue).
-
-locus_typo <- NA # how many discrete issues did you encounter that related to typographical errors?
-locus_specification <- NA # how many discrete issues did you encounter that related to incomplete, incorrect, or unclear specification of the original analyses?
-locus_analysis <- NA # how many discrete issues did you encounter that related to errors in the authors' original analyses?
-locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
-locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
-
-Affects_Conclusion <- NA # Do any reproduciiblity issues encounter appear to affect the conclusions made in the original article?
-
-
-
-                             "Affects_Conclusion" = affectsConclusion,
-                             "errorLocus_typo" = errorLocus_typo,
-                             "errorLocus_specification" = errorLocus_specification,
-                             "errorLocus_analysis" = errorLocus_analysis,
-                             "errorLocus_data" = errorLocus_data,
-                             "errorLocus_unidentified" = errorLocus_unidentified,
-                             "Nature_of_Assistance" = Nature_of_Assistance,
-                             "correctionSuggested" = correctionSuggested,
-                             "correctionPublished" = correctionPublished,
-                             "Resolved_Insufficient_Information_Errors" = Resolved_Insufficient_Information_Errors,
-                             "Resolved_Decision_Errors" = Resolved_Decision_Errors,
-                             "Resolved_Major_Numerical_Errors" = Resolved_Major_Numerical_Errors)
-
+if(reportType == "final"){
+  write_csv(reportObject, "finalReportDetailed.csv")
+  write_csv(reportObject, "finalReportSummary.csv")
+}
 ```
 
-[Please also include a brief text summary describing your findings. If this reproducibility check was a failure, you should note any suggestions as to what you think the likely cause(s) might be.]
+# Session information
 
 [This function will output information about the package versions used in this report:]
 
