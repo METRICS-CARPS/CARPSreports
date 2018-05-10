@@ -113,7 +113,7 @@ locus_analysis <- NA # how many discrete issues did you encounter that related t
 locus_data <- NA # how many discrete issues did you encounter that related to errors in the data files shared by the authors?
 locus_unidentified <- NA # how many discrete issues were there for which you could not identify the cause
 
-Affects_Conclusion <- NA # Do any reproducibility issues encounter appear to affect the conclusions made in the original article? This is a subjective judgement, but you should taking into account multiple factors, such as the presence/absence of decision errors, the number of target outcomes that could not be reproduced, the type of outcomes that could or could not be reproduced, the difference in magnitude of effect sizes, and the predictions of the specific hypothesis under scrutiny.
+Affects_Conclusion <- NA # Do any reproducibility issues encounter appear to affect the conclusions made in the original article? TRUE, FALSE, or NA. This is a subjective judgement, but you should taking into account multiple factors, such as the presence/absence of decision errors, the number of target outcomes that could not be reproduced, the type of outcomes that could or could not be reproduced, the difference in magnitude of effect sizes, and the predictions of the specific hypothesis under scrutiny.
 ```
 
 [PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
