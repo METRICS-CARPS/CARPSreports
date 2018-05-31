@@ -41,7 +41,7 @@ reproCheck <- function(reportedValue,
   }
 
   # check that value type was an accepted default
-  if(!valueType %in% c("p", "mean", "sd", "se", "df", "F", "t", "bf", "ci", "median", "es", "irr", "r", "z", "coeff", "n", "x2", "other")){
+  if(!valueType %in% c("p", "mean", "sd", "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff", "n", "x2", "other")){
     stop('WHOOPS! - YOU NEED TO ENTER THE VALUE TYPE FROM THE SPECIFIED LIST (you can also specify "other")')
   }
 
