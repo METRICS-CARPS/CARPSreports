@@ -69,8 +69,8 @@ reproCheck <- function(reportedValue,
       reportText <- paste0("MATCH for ", valueType, ". Eyeball comparison only.")
     }else if(eyeballCheck == FALSE) { # eyeball check suggests mismatch
       if(isP == TRUE){ # its a p-value
-        comparisonOutcome <- "DECISION_ERROR"
-        reportText <- paste0("DECISION ERROR for ", valueType, ". Eyeball comparison only.")
+        comparisonOutcome <- "EYEBALL_ERROR"
+        reportText <- paste0("EYEBALL CHECK ERROR for ", valueType, ". Eyeball comparison only.")
       }else if(isP == FALSE){ # its not a p-value
         comparisonOutcome <- "MAJOR_ERROR"
         reportText <- paste0("MAJOR ERROR for ", valueType, ". Eyeball comparison only.")
