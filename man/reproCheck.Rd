@@ -6,7 +6,7 @@
 \usage{
 reproCheck(reportedValue, obtainedValue, valueType = c("p", "mean", "sd",
   "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff",
-  "n", "x2", "pes", "other"), eyeballCheck = NA,
+  "n", "x2", "phi", "pes", "other"), eyeballCheck = NA,
   updatedReportObject = reportObject)
 }
 \arguments{
@@ -31,7 +31,7 @@ Errors types are defined as follows:
 >> 'major numerical' (i.e., PE >= 10%)
 If p values are being compared, also returns an additional error type:
 >> 'decision error' (i.e., reported p and obtained p fall on different sides of the .05 threshold)
-The default value types are as follows: "p" (p-value), "mean" (mean), "sd" (standard deviation), "se" (standard error), "df" (degrees of freedom), "F" (F test statistic), "t" (t test statistic), "bf" (bayes factor), "ci" (confidence interval), "median" (median), "d" (Cohen's d), "irr" (inter-rater reliability), "r" (Pearson correlation coefficient), "z" (Wilcoxon z), "coeff" (regression coefficients), "n" (count or proportion), "x2" (chi squared), "pes" (partial eta squared), "other")
+The default value types are as follows: "p" (p-value), "mean" (mean), "sd" (standard deviation), "se" (standard error), "df" (degrees of freedom), "F" (F test statistic), "t" (t test statistic), "bf" (bayes factor), "ci" (confidence interval), "median" (median), "d" (Cohen's d), "irr" (inter-rater reliability), "r" (Pearson correlation coefficient), "z" (Wilcoxon z), "coeff" (regression coefficients), "n" (count or proportion), "x2" (chi squared), "phi" (phi), "pes" (partial eta squared), "other")
 Note that sometimes exact values are not reported in the article (e.g., p < .05 ot t <1). In these cases you should visually inspect (eyeball) whether the obtained value falls on the correct side of the specified boundary (e.g., p <.05). If eyeballing is necessary, change the "eyeballCheck" parameter to TRUE if the values appear to match or FALSE if the values do not apepar to match. The eyeballCheck parameter defaults to NA because usually no eyeball check is required.
 }
 \examples{
