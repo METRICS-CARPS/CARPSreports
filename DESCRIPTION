@@ -12,4 +12,4 @@ Imports:
   readxl (>= 0.1.1),
   knitr (>= 1.15.1),
   devtools (>= 1.12.0)
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0

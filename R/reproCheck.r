@@ -15,6 +15,7 @@
 #' @param obtainedValue Enter the corresponding value obtained in your reproducibility check
 #' @param valueType The type of value being compared
 #' @param eyeballCheck whether a manual 'eyeball' comparison was required, and the outcome of the comparison TRUE/FALSE. Defaults to NA.
+#' @param round whether the obtained value should be rounded to same number of decimal places as the reported value TRUE/FALSE. Defaults to TRUE.
 #' @return Returns a short text report noting the error type and the PE. Output can also be assigned to a reportObject to keep a running tally of comparisons
 #' @export
 #' @examples
@@ -28,6 +29,7 @@ reproCheck <- function(reportedValue,
                        obtainedValue,
                        valueType = c("p", "mean", "sd", "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff", "n", "x2", "phi", "pes", "other"),
                        eyeballCheck = NA,
+                       round = TRUE,
                        updatedReportObject = reportObject) {
 
   # check that obtained value is length one
@@ -78,15 +80,17 @@ reproCheck <- function(reportedValue,
     }
   }else{ # its a regular reported value (i.e., doesn't need to be eyeballed) - let's check it out in more detail
 
-    # first make sure reported value and obtained value have the same number of decimal places
-    # this function will return the number of decimal places
-    # decimalPlaces <- function(x) {
-    #   nchar(stringr::str_split_fixed(x, "\\.", n = 2))[,2]
-    # }
-    #
-    # dp <- decimalPlaces(reportedValue) # get number of decimal places for reported value
-    # obtainedValue <- round(as.numeric(obtainedValue), dp) # round obtained value to the same number of decimal places
-    #
+    if(round == TRUE){
+      # make sure reported value and obtained value have the same number of decimal places
+      # this function will return the number of decimal places
+      decimalPlaces <- function(x) {
+        nchar(stringr::str_split_fixed(x, "\\.", n = 2))[,2]
+      }
+
+      dp <- decimalPlaces(reportedValue) # get number of decimal places for reported value
+      obtainedValue <- round(as.numeric(obtainedValue), dp) # round obtained value to the same number of decimal places
+    }
+
     obtainedValue <- as.numeric(obtainedValue) # ensure obtained value is numeric
     reportedValue <- as.numeric(reportedValue) # ensure reported value is numeric
 
@@ -114,8 +118,11 @@ reproCheck <- function(reportedValue,
         }
       }
     }
-
-    reportText <- paste0(comparisonOutcome, " for ", valueType, ". The reported value (", reportedValue,") and the obtained value (", obtainedValue,") differed by ", round(pe, 2), "%.")
+    if(round == TRUE){
+      reportText <- paste0(comparisonOutcome, " for ", valueType, ". The reported value (", reportedValue,") and the obtained value (", obtainedValue,") differed by ", round(pe, 2), "%. Note that the obtained value was rounded to ", dp," decimal places to match the reported value.")
+    }else{
+      reportText <- paste0(comparisonOutcome, " for ", valueType, ". The reported value (", reportedValue,") and the obtained value (", obtainedValue,") differed by ", round(pe, 2), "%. Note that the obtained value was not rounded.")
+    }
   }
 
   # update the reportObject

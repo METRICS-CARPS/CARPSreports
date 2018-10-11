@@ -5,9 +5,9 @@
 \title{reproCheck function}
 \usage{
 reproCheck(reportedValue, obtainedValue, valueType = c("p", "mean", "sd",
-  "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z", "coeff",
-  "n", "x2", "phi", "pes", "other"), eyeballCheck = NA,
-  updatedReportObject = reportObject)
+  "se", "df", "F", "t", "bf", "ci", "median", "d", "irr", "r", "z",
+  "coeff", "n", "x2", "phi", "pes", "other"), eyeballCheck = NA,
+  round = TRUE, updatedReportObject = reportObject)
 }
 \arguments{
 \item{reportedValue}{Enter the value reported in the article}
@@ -17,6 +17,8 @@ reproCheck(reportedValue, obtainedValue, valueType = c("p", "mean", "sd",
 \item{valueType}{The type of value being compared}
 
 \item{eyeballCheck}{whether a manual 'eyeball' comparison was required, and the outcome of the comparison TRUE/FALSE. Defaults to NA.}
+
+\item{round}{whether the obtained value should be rounded to same number of decimal places as the reported value TRUE/FALSE. Defaults to TRUE.}
 }
 \value{
 Returns a short text report noting the error type and the PE. Output can also be assigned to a reportObject to keep a running tally of comparisons
