@@ -80,12 +80,14 @@ reproCheck <- function(reportedValue,
 
     # first make sure reported value and obtained value have the same number of decimal places
     # this function will return the number of decimal places
-    decimalPlaces <- function(x) {
-      nchar(stringr::str_split_fixed(x, "\\.", n = 2))[,2]
-    }
-
-    dp <- decimalPlaces(reportedValue) # get number of decimal places for reported value
-    obtainedValue <- round(as.numeric(obtainedValue), dp) # round obtained value to the same number of decimal places
+    # decimalPlaces <- function(x) {
+    #   nchar(stringr::str_split_fixed(x, "\\.", n = 2))[,2]
+    # }
+    #
+    # dp <- decimalPlaces(reportedValue) # get number of decimal places for reported value
+    # obtainedValue <- round(as.numeric(obtainedValue), dp) # round obtained value to the same number of decimal places
+    #
+    obtainedValue <- as.numeric(obtainedValue) # ensure obtained value is numeric
     reportedValue <- as.numeric(reportedValue) # ensure reported value is numeric
 
     pe <- ((abs(obtainedValue - reportedValue))/abs(reportedValue))*100 # calculate percentage error
@@ -113,7 +115,7 @@ reproCheck <- function(reportedValue,
       }
     }
 
-    reportText <- paste0(comparisonOutcome, " for ", valueType, ". The reported value (", reportedValue,") and the obtained value (", obtainedValue,") differed by ", round(pe, 2), "%. NB obtained value was rounded to ", dp, " decimal places.")
+    reportText <- paste0(comparisonOutcome, " for ", valueType, ". The reported value (", reportedValue,") and the obtained value (", obtainedValue,") differed by ", round(pe, 2), "%.")
   }
 
   # update the reportObject
