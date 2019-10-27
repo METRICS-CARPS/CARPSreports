@@ -93,16 +93,21 @@ reproCheck <- function(reportedValue,
 
     obtainedValue <- as.numeric(obtainedValue) # ensure obtained value is numeric
     reportedValue <- as.numeric(reportedValue) # ensure reported value is numeric
-
-    pe <- ((abs(obtainedValue - reportedValue))/abs(reportedValue))*100 # calculate percentage error
-
-    # identify comparison outcome based on amount of percentage error
-    if(pe >= 10){
-      comparisonOutcome <- "MAJOR_ERROR"
-    }else if(pe > 0 & pe < 10){
-      comparisonOutcome <- "MINOR_ERROR"
-    }else{
+    
+    if(reportedValue == 0 & obtainedValue == 0){ # in the case both are zero, then it's a match.
       comparisonOutcome <- "MATCH"
+      pe <- 0
+    }else{
+      pe <- ((abs(obtainedValue - reportedValue))/abs(reportedValue))*100 # calculate percentage error
+      
+      # identify comparison outcome based on amount of percentage error
+      if(pe >= 10){
+        comparisonOutcome <- "MAJOR_ERROR"
+      }else if(pe > 0 & pe < 10){
+        comparisonOutcome <- "MINOR_ERROR"
+      }else{
+        comparisonOutcome <- "MATCH"
+      }
     }
 
     if(isP){ # if we are comparing p values
