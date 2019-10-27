@@ -1,8 +1,8 @@
-Package: CARPSreports
-Title: Build reproducibility reports for the CARPS project
+Package: ReproReports
+Title: Build reports for reproducibility assignments
 Version: 0.1
-Authors@R: person("Tom", "Hardwicke", email = "tom.hardwicke@stanford.edu", role = c("aut", "cre"))
-Description: An Rmarkdown template and custom functions to write reproducibility reports for the Checking Analytic Reproducibility at Psychological Science (CARPS) project.
+Authors@R: person("Tom", "Hardwicke", email = "tom.hardwicke@charite.de", role = c("aut", "cre"))
+Description: An Rmarkdown template and custom functions to write reports for reproducibility class assignments.
 Depends: R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
