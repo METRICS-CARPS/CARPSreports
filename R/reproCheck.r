@@ -5,7 +5,7 @@
 #' (2) identifies the error type (decision error, major numerical, minor numerical, no error)
 #' (3) user must specificy the value type from the defaults list (or use 'other' if not listed)
 #' Errors types are defined as follows:
-#' >> 'minor numerical': i.e., >= 2% PE < 10%
+#' >> 'minor numerical': i.e., >= 0% PE < 10%
 #' >> 'major numerical' (i.e., PE >= 10%)
 #' If p values are being compared, also returns an additional error type:
 #' >> 'decision error' (i.e., reported p and obtained p fall on different sides of the .05 threshold)
